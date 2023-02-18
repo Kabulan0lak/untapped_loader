@@ -12,6 +12,17 @@
             "console": "integratedTerminal"
         },
         {
+            "name": "asaak_full",
+            "type": "python",
+            "request": "launch",
+            "module": "run_job",
+            "args": [
+                "execute",
+                "--job_name=asaak",
+                "--full_refresh=yes"
+            ]
+        },
+        {
             "name": "asaak",
             "type": "python",
             "request": "launch",
@@ -19,6 +30,7 @@
             "args": [
                 "execute",
                 "--job_name=asaak",
+                "--full_refresh=no"
             ]
         },
     ]
