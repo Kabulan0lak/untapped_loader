@@ -2,8 +2,8 @@
     "db_conf": {
         "host": "winhost",
         "database": "postgres",
-        "user": "postgres",
-        "password": "postgres",
+        "user": "json_loader",
+        "password": "json_loader",
         "port": 5432
     },
     "asaak_path": "../data/Asaak_data/Asaak",

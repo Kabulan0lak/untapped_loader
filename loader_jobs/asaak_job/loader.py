@@ -9,7 +9,14 @@ from loader_jobs.utils.postgres import PgConnector
 from loader_jobs.utils.walk_files import *
 
 
-def read_and_load_asaak_raw_data(full_refresh: bool = True, n_days: int = 3):
+def read_and_load_asaak_raw_data(full_refresh: bool = False, n_days: int = 3):
+    """Main function to read and load data from asaak directory
+    Uses  a conf.json file and a mapping.json file.
+
+    Args:
+        full_refresh (bool, optional): Whether or not to fully refresh the table. Defaults to False.
+        n_days (int, optional): Number of days to fetch if full_refresh is False. Defaults to 3.
+    """
 
     logging.warn("Asaak job starting")
 
@@ -116,7 +123,3 @@ def read_and_load_asaak_raw_data(full_refresh: bool = True, n_days: int = 3):
                     conn.execute(stmt)
 
     logging.warn("Asaak job done")
-
-
-def json_to_db(jsonFile):
-    return

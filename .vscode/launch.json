@@ -19,7 +19,7 @@
             "args": [
                 "execute",
                 "--job_name=asaak",
-                "--full_refresh=yes"
+                "--n_days=all"
             ]
         },
         {
@@ -30,7 +30,51 @@
             "args": [
                 "execute",
                 "--job_name=asaak",
-                "--full_refresh=no"
+                "--n_days=4"
+            ]
+        },
+        {
+            "name": "emprego_full",
+            "type": "python",
+            "request": "launch",
+            "module": "run_job",
+            "args": [
+                "execute",
+                "--job_name=emprego",
+                "--n_days=all"
+            ]
+        },
+        {
+            "name": "emprego",
+            "type": "python",
+            "request": "launch",
+            "module": "run_job",
+            "args": [
+                "execute",
+                "--job_name=emprego",
+                "--n_days=0"
+            ]
+        },
+        {
+            "name": "flexclub_full",
+            "type": "python",
+            "request": "launch",
+            "module": "run_job",
+            "args": [
+                "execute",
+                "--job_name=flexclub",
+                "--n_days=all"
+            ]
+        },
+        {
+            "name": "flexclub",
+            "type": "python",
+            "request": "launch",
+            "module": "run_job",
+            "args": [
+                "execute",
+                "--job_name=flexclub",
+                "--n_days=8"
             ]
         },
     ]

@@ -24,6 +24,15 @@ def get_full_list_of_filepaths(prefix_path: str) -> List[str]:
 
 
 def get_top_n_files_of_last_month(prefix_path: str, n: int = 3) -> List[str]:
+    """Returns the file paths of all files in the last month and n last days
+
+    Args:
+        prefix_path (str): The path to the directory
+        n (int, optional): Number of days to retrieve. Defaults to 3.
+
+    Returns:
+        List[str]: The list of all file paths
+    """
 
     # Find the last month and n last days
     max_m, n_days = get_max_month_and_n_last_days(prefix_path, n)
@@ -40,6 +49,15 @@ def get_top_n_files_of_last_month(prefix_path: str, n: int = 3) -> List[str]:
 
 
 def get_max_month_and_n_last_days(file_path: str, n: int = 3):
+    """Return the last month, and last n days within that month
+
+    Args:
+        file_path (str): The path to the directory
+        n (int, optional): Number of days to retrieve. Defaults to 3.
+
+    Returns:
+        int, List[int]: The month and a list of days
+    """
     # Find the last month
     max_m = max([int(m) for m in os.listdir(file_path)])
 
