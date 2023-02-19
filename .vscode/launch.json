@@ -1,0 +1,81 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "asaak_full",
+            "type": "python",
+            "request": "launch",
+            "module": "run_job",
+            "args": [
+                "execute",
+                "--job_name=asaak",
+                "--n_days=all"
+            ]
+        },
+        {
+            "name": "asaak",
+            "type": "python",
+            "request": "launch",
+            "module": "run_job",
+            "args": [
+                "execute",
+                "--job_name=asaak",
+                "--n_days=4"
+            ]
+        },
+        {
+            "name": "emprego_full",
+            "type": "python",
+            "request": "launch",
+            "module": "run_job",
+            "args": [
+                "execute",
+                "--job_name=emprego",
+                "--n_days=all"
+            ]
+        },
+        {
+            "name": "emprego",
+            "type": "python",
+            "request": "launch",
+            "module": "run_job",
+            "args": [
+                "execute",
+                "--job_name=emprego",
+                "--n_days=0"
+            ]
+        },
+        {
+            "name": "flexclub_full",
+            "type": "python",
+            "request": "launch",
+            "module": "run_job",
+            "args": [
+                "execute",
+                "--job_name=flexclub",
+                "--n_days=all"
+            ]
+        },
+        {
+            "name": "flexclub",
+            "type": "python",
+            "request": "launch",
+            "module": "run_job",
+            "args": [
+                "execute",
+                "--job_name=flexclub",
+                "--n_days=8"
+            ]
+        },
+    ]
+}
