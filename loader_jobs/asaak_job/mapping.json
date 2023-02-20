@@ -96,6 +96,7 @@
         "id": "id",
         "installment_name": "name",
         "loan": "loan",
+        "payment_id": "splits",
         "installment_number": "number",
         "start_date": "start_date",
         "end_date": "end_date",
