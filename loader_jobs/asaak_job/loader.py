@@ -18,7 +18,9 @@ def read_and_load_asaak_raw_data(full_refresh: bool = False, n_days: int = 3):
         n_days (int, optional): Number of days to fetch if full_refresh is False. Defaults to 3.
     """
 
-    logging.warn("Asaak job starting")
+    # Log info
+    mode = "full_refresh" if full_refresh else f"incremental ({n_days} days)"
+    logging.warn(f"Running asaak_job with mode {mode}")
 
     # Read the configuration file
     with open("loader_jobs/conf.json") as f:
@@ -73,8 +75,9 @@ def read_and_load_asaak_raw_data(full_refresh: bool = False, n_days: int = 3):
                     )
                     conn.execute(stmt)
 
-            # File ounter
+            # File counter
             cpt = 0
+            total = len(file_paths)
 
             # For each file
             for fp in file_paths:
@@ -82,7 +85,7 @@ def read_and_load_asaak_raw_data(full_refresh: bool = False, n_days: int = 3):
                 # Log every 50 files processed
                 cpt += 1
                 if cpt % 50 == 0:
-                    logging.warn(f"File {cpt}/{len(file_paths)}")
+                    logging.warn(f"File {cpt}/{total}")
 
                 # Calculate the acquisition date using the file path
                 acquisition_timestamp = get_acquisition_date_from_file_path(
@@ -93,7 +96,8 @@ def read_and_load_asaak_raw_data(full_refresh: bool = False, n_days: int = 3):
                 with open(fp) as f:
                     raw = json.load(f)
 
-                # For each table, if they are in the file
+                # For each table except payments_installments relation table,
+                # if they are in the file
                 for table_name in [k for k in mapping.keys() if k in raw.keys()]:
 
                     # Initialize a list of Dict to insert
@@ -110,16 +114,25 @@ def read_and_load_asaak_raw_data(full_refresh: bool = False, n_days: int = 3):
                             if v1 == k2
                         }
 
+                        # Transform splits into single value (installments/payments)
+                        if table_name == "installments":
+                            record["payment_id"] = (
+                                record["payment_id"][0]
+                                if record["payment_id"]
+                                else None
+                            )
+
                         # Add the acquisition date to the Dict
                         record["acquisition_timestamp"] = acquisition_timestamp
+
+                        # Add the insert timestamp
+                        record["insert_timestamp"] = datetime.now()
 
                         # Add the record to the list
                         record_list.append(record)
 
-                    # Prepare the statement
+                    # Insert the record list
                     stmt = tables[table_name].insert().values(record_list)
-
-                    # Execute the statement
                     conn.execute(stmt)
 
     logging.warn("Asaak job done")
